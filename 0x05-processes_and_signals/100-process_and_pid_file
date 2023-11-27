@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#infinite and beyond with SIGTERM
+touch /var/run/holbertonscript.pid
+
+i=1
+while [ $i ]
+do
+	trap "echo I hate the kill command; rm -f /var/run/holbertonscript.pid; exit" 15
+	trap "echo Y U no love me?!" 2
+	trap "rm -f /var/run/holbertonscript.pid; exit" 3
+	echo To infinity and beyond
+done
