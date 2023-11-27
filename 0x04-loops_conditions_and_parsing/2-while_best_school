@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#This script displays text using while loop
+while ((i < 10))
+do
+	echo "Best School"
+	i++
+done
