@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#infinite and beyond with SIGTERM
+i=1
+while [ $i ]
+do
+	trap "echo I am invincible!!!" 15
+	echo To infinity and beyond
+	sleep 2
+done
