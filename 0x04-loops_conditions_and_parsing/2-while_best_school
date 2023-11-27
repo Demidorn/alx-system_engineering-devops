@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #This script displays text using while loop
-while ((i < 10))
+count = 0
+while [ $count -lt 10]
 do
 	echo "Best School"
-	i++
+	((count++))
 done
