@@ -3,18 +3,18 @@
 FILE=School
 if [ ! -e "$FILE" ]
 then
-	echo "School file does not exist"
+	echo "school file exists"
 else
-	echo "School file exists"
+	echo "school file does not exist"
 	if [ -s "$FILE" ]
 	then
-		echo "School file is not empty"
+		echo "school file is empty"
 	else
-		echo "School file is empty"
+		echo "school file is not empty"
 	fi
 
 	if [ -f "$FILE" ]
 	then
-		echo "School is a regular file"
+		echo "school is a regular file"
 	fi
 fi
