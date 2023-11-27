@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #display of text using while loop
 COUNT=0
-while [ $COUNT lt 10 ]
+while [ $COUNT -lt 10 ]
 do
-	echo "Best School"
+	echo "Holberton School"
 	((COUNT++))
 done
