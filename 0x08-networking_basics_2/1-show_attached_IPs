@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#Display active IPV4
+arp | awk '{print $1}'
