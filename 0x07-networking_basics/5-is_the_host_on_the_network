@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #ping IP five times
+
 args=("$@")
 num=$#
 if [ "num" lt 1 ];
