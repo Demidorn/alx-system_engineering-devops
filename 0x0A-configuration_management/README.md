@@ -30,7 +30,6 @@ You do not need to attempt to upgrade versions. This project is simply a set of 
 
 ## Tasks
 
-|----------------- |--------------------------- | --------------------------------|
 |Create a file |Using Puppet, create a file in __/tmp.__ |Requirements:<br>File path is /tmp/school<br>File permission is 0744<br><br>File owner is www-data<br>File group is www-data<br>
 File contains I love Puppet|
 |Install a package |Using Puppet, install __flask__ from __pip3.__ |Requirements:<br>Install __flask__<br>
