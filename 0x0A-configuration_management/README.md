@@ -29,7 +29,7 @@ You do not need to attempt to upgrade versions. This project is simply a set of 
 > $ gem install puppet-lint
 
 ## Tasks
-
+|--- |----- |---------|
 |Create a file |Using Puppet, create a file in __/tmp.__ |Requirements:<br>File path is /tmp/school<br>File permission is 0744<br><br>File owner is www-data<br>File group is www-data<br>
 File contains I love Puppet|
 |Install a package |Using Puppet, install __flask__ from __pip3.__ |Requirements:<br>Install __flask__<br>
@@ -71,7 +71,7 @@ Version must be 2.1.0 |
 ### Example: 3
 ### - Terminal #0 - starting my process
 
-> root@d391259bf577:/# cat killmenow
+> ```bash root@d391259bf577:/# cat killmenow
 > #!/bin/bash
 > while [[ true ]]
 > do
@@ -79,16 +79,19 @@ Version must be 2.1.0 |
 > done
 
 > root@d391259bf577:/# ./killmenow
+> ```
 
 ### - Terminal #1 - executing my manifest
 
-> root@d391259bf577:/# puppet apply 2-execute_a_command.pp
+> ```bash root@d391259bf577:/# puppet apply 2-execute_a_command.pp
 > Notice: Compiled catalog for d391259bf577.hsd1.ca.comcast.net in > environment production in 0.01 seconds
 > Notice: /Stage[main]/Main/Exec[killmenow]/returns: executed successfully
 > Notice: Finished catalog run in 0.10 seconds
-> root@d391259bf577:/# 
+> root@d391259bf577:/#
+> ```
 ### - Terminal #0 - process has been terminated
 
-> root@d391259bf577:/# ./killmenow
+> ```bash root@d391259bf577:/# ./killmenow
 > Terminated
 > root@d391259bf577:/#
+> ```
