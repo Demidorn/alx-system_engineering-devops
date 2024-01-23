@@ -3,12 +3,12 @@
 file { '/home/ubuntu/.ssh/config':
 ensure  => present,
 mode	=> '0600',
-content => @("SSHCONFIG"
+content => @(SSHCONFIG)
 Host *
 IdentifyFile ~/.ssh/school
 PasswordAuthentication no
 SSHCONFIG
-),
+,
 owner	=> 'ubuntu',
 group	=> 'ubuntu',
 }
