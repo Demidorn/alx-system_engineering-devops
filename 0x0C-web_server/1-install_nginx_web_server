@@ -4,8 +4,7 @@
 
 echo -e "Nginx updates and installation\n"
 sudo apt-get update -y -qq && \
-	sudo apt-get install nginx -y
-sudo apt-get install ufw
+sudo apt-get install nginx -y
 
 echo -e "\nStarting nginx\n"
 
