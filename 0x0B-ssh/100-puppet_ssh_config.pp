@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # client SSH configuration file using puppet
+file { '/home/ubuntu':
+  ensure  => directory,
+  mode    => '0755',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+}
 
 file { '/home/ubuntu/.ssh':
   ensure  => directory,
