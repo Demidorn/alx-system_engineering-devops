@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# configures a new Ubuntu machine by installing Nginx
+# that listens to port 80 and returns 'Hello world'
+
+echo -e "Nginx updates and installation\n"
+sudo apt-get update -y -qq && \
+	sudo apt-get install nginx -y
+sudo apt-get install ufw
+
+echo -e "\nStarting nginx\n"
+
+sudo service nginx start
+
+sudo ufw allow 'Nginx HTTP'
+
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+echo -e "Hello world!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+sudo service nginx restart
+
+echo -e "\nCompleted.\n"
