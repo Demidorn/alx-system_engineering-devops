@@ -10,18 +10,13 @@ echo -e "\nStarting nginx\n"
 
 sudo service nginx start
 
-#sudo ufw allow 'Nginx HTTP'
-sudo ufw allow 80
-
-sudo mkdir -p /var/www/html
+sudo ufw allow 'Nginx HTTP'
 
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
 cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
-#echo -e "Hello world!" | dd status=none of=/var/www/html/index.nginx-debian.html
-
-echo -e "Hello world!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
+echo -e "Hello world!" | dd status=none of=/var/www/html/index.nginx-debian.html
 
 sudo service nginx restart
 
