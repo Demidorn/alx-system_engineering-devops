@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+#installing load balancer
+
+echo -e "Updating system\n"
+
+function install() {
+	command -v "$1" &> /dev/null
+	#shellcheck disabled SC2181
+	if [ $? -ne 0 ]; then
+		echo -e "installing: $1\n"
+		sudo apt-get update -y -qq && \
+		sudo apt-get install -y "$1" -qq
+		echo -e "\n"
+	else
+		echo -e " ${1} already installed \n"
+	fi
+}
+
+install haproxy
+echo -e "installing packages\n"
+
+#backup default server\n"
+sudo cp /etc/haproxy/haproxy.cfg haproxy_default.backup
+
+server_config=\
+"
+defaults
+	mode http
+	timeout client 15s
+	timeout connect 10s
+	timeout server 15s
+	timeout http-request 10s
+
+frontend demidorn-tech-frontend
+	bind *:80
+	default_backend demidorn-tech-backend
+
+backend demidorn-tech-backend
+	balance roundrobin
+	server 438197-web-01 100.25.177.69:80 check
+	server 438197-web-02 107.23.63.212:80 check
+"
+
+echo "$server_config" | sudo dd status=none of=/etc/haproxy/haproxy.cfg
+
+#enable haproxy to start by init script
+echo "ENABLED=1" | sudo dd status=none of=/etc/default/haproxy
+
+echo "configured - Roundrobin on web-01 & web-02"
+
+if [ "$(pgrep -c haproxy)" -le 0 ]; then
+	sudo service haproxy start
+else
+	sudo service haproxy restart
+fi
