@@ -1,19 +1,28 @@
 #!/usr/bin/env bash
 # a script that prints our domains and subdomains
 function audit_subdomain {
-	local domain="$1"
-	local subdomain="$2"
+	#local domain="$1"
+	#local subdomain="$2"
 
-	if [ -Z "$subdomain" ]; then
-		subdomains=("www" "lb-01" "web-01" "web-02")
-	else
+	#if [ -Z "$subdomain" ]; then
+		#subdomains=("www" "lb-01" "web-01" "web-02")
+	if ["$#" -eq 2 ]; then
+		local domain="$1"
+		local subdomain="$2"
+	#else
 		subdomains=("$subdomain")
-	fi
+	#fi
 	
 	for sub in "${subdomains[@]}"; do
 		record_type=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $4 }')
 		destination=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $5}')
 		echo "the subdomain $sub is a $record_type record and point to $destination"
 	done
+	fi
 }
-audit_subdomain "$1" "$2"
+#audit_subdomain "$1" "$2"
+subdomains=("www" "lb-01" "web-01" "web-02")
+
+for sub in "${subdomains[@]}"; do
+    audit_subdomain "your_domain_here" "$sub"
+done
