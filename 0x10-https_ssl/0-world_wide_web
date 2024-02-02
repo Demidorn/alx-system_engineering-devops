@@ -12,7 +12,7 @@ function audit_subdomain {
 	
 	for sub in "${subdomains[@]}"; do
 		record_type=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $4 }')
-		destination=$(dig "sub.$domain" | awk '/ANSWER SECTION/ { getline; print $5}')
+		destination=$(dig "$sub.$domain" | awk '/ANSWER SECTION/ { getline; print $5}')
 		echo "the subdomain $sub is a $record_type record and point to $destination"
 	done
 }
