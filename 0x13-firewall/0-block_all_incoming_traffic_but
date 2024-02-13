@@ -1,0 +1,31 @@
+#!/bin/usr/env bash
+#configure ufw to deny all incoming connections except
+# from port 22,443 and 80
+
+echo -e  "setting up ufw firewall\n"
+echo -e "Updating\n"
+
+sudo apt-get update
+
+echo -e "insralling ufw\n"
+
+sudo apt-get install -y ufw
+
+echo -e "configuring incoming and outgoing traffic\n"
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+echo -e "allowed incoming port\n"
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudp allow 90/tcp
+
+#check status
+sudo ufw status verbose
+
+echo -e "enable firewall\n"
+
+sudo ufw enable
+
+#check status
+sudo ufw status verbose
