@@ -4,9 +4,9 @@ Python script that exports data in the CSV format
 """
 
 
+import csv
 import requests
 import sys
-import csv
 
 
 if __name__ == "__main__":
@@ -17,7 +17,8 @@ if __name__ == "__main__":
     todos_response = requests.get(
             f"{api_url}/todos", params={"userId": employee_id})
     todos = todos_response.json()
-    total_task = len(todos)
+    todoss_complete = [task for task in todos if task["completed"]]
+    total_task = len(todos_complete)
 
     with open('{}.csv'.format(employee_id), 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)

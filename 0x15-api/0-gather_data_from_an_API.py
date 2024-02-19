@@ -22,7 +22,7 @@ if __name__ == "__main__":
         if todo.get("completed") is True:
             todos_complete.append(todo.get("title"))
 
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         req, len(todos_complete), len(todos)))
 
     for complete in todos_complete:
