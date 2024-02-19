@@ -10,7 +10,7 @@ import sys
 if __name__ == "__main__":
     api_url = "https://jsonplaceholder.typicode.com/"
     employee_id = sys.argv[1]
-    user_response = requests.get(f"{api_url}/users/{}".format(employee_id))
+    user_response = requests.get(f"{api_url}/users/{employee_id}")
     req = user_response.json().get('username')
     todos_response = requests.get(
             f"{api_url}/todos", params={"userId": employee_id})
@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     for tasks in todos:
         t = {}
-        t['username'] = username
+        t['username'] = req
         t['task'] = tasks.get('title')
         t['completed'] = tasks.get('completed')
         user_data[employee_id].append(t)
