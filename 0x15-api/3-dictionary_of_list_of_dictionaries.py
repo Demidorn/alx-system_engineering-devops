@@ -10,27 +10,28 @@ import sys
 
 
 if __name__ == "__main__":
-    api_url = "https://jsonplaceholder.typicode.com/"
-    all_users_response = requests.get(f"{api_url}/users")
-    all_users = all_users_response.json()
+    all_emps = {}
 
-    all_tasks = {}
+    users = requests.get('https://jsonplaceholder.typicode.com/users').json()
 
-    for user in all_users:
-        employee_id = str(user['id'])
-        username = user['username']
+    for user in users:
 
-        todos_response = requests.get(
-                f"{api_url}/todos", params={"userId": employee_id})
-        todos = todos_response.json()
-        user_tasks = [
-                {
-                    "username": username,
-                    "tasks": todo["title"],
-                    "completed": todo["completed"]
-                    }
-                for todo in todos
-                ]
-        all_tasks[employee_id] = user_tasks
-    with open('todo_all_employee.json', 'w') as json_file_2:
-        json.dump(all_tasks, json_file_2)
+        user_id = user.get('id')
+        username = user.get('username')
+
+        all_todos = []
+
+        todos = requests.get('https://jsonplaceholder.typicode.com/todos',
+                             params={'userId': user_id}).json()
+
+        for task in todos:
+            todo = {}
+            todo['username'] = username
+            todo['task'] = task.get('title')
+            todo['completed'] = task.get('completed')
+            all_todos.append(todo)
+
+        all_emps[user_id] = all_todos
+
+    with open('todo_all_employees.json', 'w') as f:
+        json.dump(all_emps, f)
