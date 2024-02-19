@@ -8,7 +8,8 @@ import requests
 import sys
 
 if __name__ == "__main__":
-     api_url = "https://jsonplaceholder.typicode.com/"
+    api_url = "https://jsonplaceholder.typicode.com/"
+
     employee_id = sys.argv[1]
     user_response = requests.get(f"{api_url}/users/{employee_id}")
     req = user_response.json().get('username')
