@@ -8,24 +8,22 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    user = requests.get('https://jsonplaceholder.typicode.com/users/{}'.
-                        format(user_id))
-    username = user.json().get('username')
-
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos/',
-                         params={'userId': user_id})
-    todos = todos.json()
-
-    emp = {}
-    emp[user_id] = []
+     api_url = "https://jsonplaceholder.typicode.com/"
+    employee_id = sys.argv[1]
+    user_response = requests.get(f"{api_url}/users/{employee_id}")
+    req = user_response.json().get('username')
+    todos_response = requests.get(
+            f"{api_url}/todos", params={"userId": employee_id})
+    todos = todos_response.json()
+    user_data = {}
+    user_data[employee_id] = []
 
     for tasks in todos:
         t = {}
-        t['username'] = username
+        t['username'] = req
         t['task'] = tasks.get('title')
         t['completed'] = tasks.get('completed')
-        emp[user_id].append(t)
+        user_data[employee_id].append(t)
 
-    with open('{}.json'.format(user_id), 'w') as f:
-        json.dump(emp, f)
+    with open('{}.json'.format(employee_id), 'w') as json_file:
+        json.dump(user_data, json_file)
