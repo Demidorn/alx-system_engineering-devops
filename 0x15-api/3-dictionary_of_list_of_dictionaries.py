@@ -20,7 +20,8 @@ if __name__ == "__main__":
         employee_id = str(user['id'])
         username = user['username']
 
-        todos_response = requests.get(f"{api_url}/todos", params={"userId": employee_id})
+        todos_response = requests.get(
+                f"{api_url}/todos", params={"userId": employee_id})
         todos = todos_response.json()
         user_tasks = [
                 {
@@ -33,4 +34,3 @@ if __name__ == "__main__":
         all_tasks[employee_id] = user_tasks
     with open('todo_all_employee.json', 'w') as json_file_2:
         json.dump(all_tasks, json_file_2)
-

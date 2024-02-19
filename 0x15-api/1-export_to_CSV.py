@@ -21,8 +21,8 @@ if __name__ == "__main__":
 
     with open('{}.csv'.format(employee_id), 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
-            "TASK_TITLE"])
+        csv_writer.writerow(
+                ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         todos_complete = [task for task in todos if task["completed"]]
         completed_task = len(todos_complete)
         """csvfile.write("Employee {} is done with tasks({}/{}):".format(

@@ -12,7 +12,8 @@ if __name__ == "__main__":
     employee_id = sys.argv[1]
     user_response = requests.get(f"{api_url}/users/{employee_id}")
     req = user_response.json().get('name')
-    todos_response = requests.get(f"{api_url}/todos", params={"userId":employee_id})
+    todos_response = requests.get(
+            f"{api_url}/todos", params={"userId": employee_id})
     todos = todos_response.json()
 
     user_data = {
