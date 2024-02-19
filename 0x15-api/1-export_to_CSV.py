@@ -15,14 +15,9 @@ if __name__ == "__main__":
     todos_response = requests.get(
         f"{api_url}/todos", params={"userId": employee_id})
     todos = todos_response.json()
-    todos_complete = [task for task in todos if task["completed"]]
-    total_task = len(todos_complete)
 
-    with open('{}.csv'.format(employee_id), 'w', newline='') as csvfile:
-        csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        csv_writer.writerow(
-            ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-
-        for task in todos_complete:
-            row = [employee_id, req, str(task["completed"]), task["title"]]
-            csv_writer.writerow(row)
+    with open('{}.csv'.format(employee_id), 'w', newline='') as f:
+        writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+        for task in todos:
+            writer.writerow([employee_id, req, str(task.get('completed')),
+                            task.get('title')])
