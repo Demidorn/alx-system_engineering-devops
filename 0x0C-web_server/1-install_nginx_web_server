@@ -27,6 +27,6 @@ sudo service nginx status
 sudo cat /var/log/nginx/error.log
 
 #Adjust the output to contain ["Hello World!"]
-echo -e "\n[\"Hello World!\"]\n"
+echo -e "\n[\"Hello World!\"]\n" | dd status=none of=/var/www/html/index.nginx-debian.html
 
 echo -e "\nCompleted.\n"
