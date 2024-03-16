@@ -1,11 +1,6 @@
 # increase the amount of traffic an Nginx can handle
 exec  { 'fix--for-nginx':
 	#modify the ULIMIT value
-	command	=> '/bin/sed -i "s/15/4096/" /etc/default/nginx',
-	path	=> '/usr/local/bin/:/bin/',
+	command	=> "sed -i 's/15/4096/g' /etc/default/nginx && service nginx restart",
+	path	=> ['/bin', '/usr/bin', '/usr/sbin']
 }
-
-exec { 'nginx-restart':
-	command	=> '/etc/init.d/nginx restart',
-	path	=> '/etc/init.d/',
-}	
